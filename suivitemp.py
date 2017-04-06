@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+t#!/usr/bin/env python
 import datetime
 import serial
 import time
@@ -22,7 +22,7 @@ with open('suivitemp.txt', 'a') as f: #creation du fichier a modifier pour contr
 print 'date et heure,temp_in,temp_ext,statut_fan,statut_chauff,press, humidity\n' #pour verifier le deroulement en mode terminal
 
 while True: #début de la boucle 5min
-    os.system('sudo /home/pi/suivitemp/Dropbox-uploader/dropbox_uploader.sh upload /home/pi/suivitemp.txt /suivitemp') #tape la ligne de cmd pour uploader sur dropbox
+    os.system('sudo /home/pi/regul_temp/Dropbox-uploader/dropbox_uploader.sh upload /home/pi/suivitemp.txt /suivitemp') #tape la ligne de cmd pour uploader sur dropbox
     #vide la memoire des enregistrement 5s
     fivemintemp_in = []
     fivemintemp_ext = []

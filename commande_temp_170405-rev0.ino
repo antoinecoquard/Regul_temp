@@ -1,21 +1,18 @@
-//pour le 280
+//Pour le 280 - temp int boitier
 #include <Wire.h>
 #include "SPI.h" //Why? Because library supports SPI and I2C connection
 #include <Adafruit_Sensor.h>
 #include "Adafruit_BMP280.h"
-//pour le dht11
-#include <dht.h>
-//pour écran LCD
-#include <LiquidCrystal.h>
+Adafruit_BMP280 bmp; // I2C - Setup connection of the sensor
 
+//Pour le dht11 - temp ext boitier
+#include <dht.h>
 dht DHT;
 #define DHT11_PIN 8
 
+//Pour écran LCD
+#include <LiquidCrystal.h>
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
-
-//Setup connection of the sensor
-Adafruit_BMP280 bmp; // I2C
-
 
 //Variables
 float pressure;   //To store the barometric pressure (Pa)
@@ -26,15 +23,15 @@ float temp_ext;  //To store the DHT temparature
 int statut_fan;  //état du ventialteur 1 On 0 off
 int statut_chauff; // état du fil chauffant 1 On 0 off
 
+//déclaration sortie fan et chauffage
+int pin_fan = 9;
+int pin_chauff = 10;
+
 //Instruction pour regulation de temperature
 float temp_basse = 20;  // Limite basse de temperature (oC)
 float temp_haute = 25;  // Limite haute de temperature (oC)
 float zone_basse = 22;  // Limite basse de temperature (oC)
 float zone_haute = 23;  // Limite haute de temperature (oC)
-
-//déclaration sortie fan et chauffage
-int pin_fan = 9;
-int pin_chauff = 10;
 
 void setup() {
   bmp.begin();    //Begin the sensor
@@ -43,8 +40,7 @@ void setup() {
   Serial.begin(9600); //Begin serial communication at 9600bps
   lcd.begin(16, 2);
   lcd.setCursor(0, 0);
-  lcd.print("Tin:");
-  
+  lcd.print("Tin:");  
 }
 
 void loop() {

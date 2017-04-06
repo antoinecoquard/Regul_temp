@@ -1,12 +1,12 @@
-t#!/usr/bin/env python
+#!/usr/bin/env python
 import datetime
 import serial
 import time
 import os
 from decimal import Decimal
-os.chdir(/home/pi/regul_temp/)
+os.chdir('/home/pi/regul_temp')
 ser = serial.Serial(
-    port='/dev/ttyACM0', #port usb sur Pi à changer si PC
+    port='/dev/ttyACM0', #port usb sur Pi a changer si PC
     baudrate = 9600 #baudrate du port serie
 )
 
@@ -14,14 +14,14 @@ ser.readline() #pour debug
 time.sleep(5)
 ser.readline() #fin du debug
 with open('suivitemp.txt', 'a') as f: #creation du fichier a modifier pour controler le repertoir
-        f.write( 'importation demarre le:') #en tête qui se refait en cas de redemarage (3 lignes)
+        f.write( 'importation demarre le:') #en tete qui se refait en cas de redemarage (3 lignes)
         f.write(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M')))
         f.write('\n')
         f.write( 'date et heure,temp_in,temp_ext,statut_fan,statut_chauff,press, humidity\n')
         f.write( 'yyyy-mm-dd hh:mm:ss,degC,degC,ss,ss,hPa,%\n')
 print 'date et heure,temp_in,temp_ext,statut_fan,statut_chauff,press, humidity\n' #pour verifier le deroulement en mode terminal
 
-while True: #début de la boucle 5min
+while True: #debut de la boucle 5min
     os.system('sudo /home/pi/regul_temp/Dropbox-uploader/dropbox_uploader.sh upload /home/pi/regul_temp/suivitemp.txt /suivitemp') #tape la ligne de cmd pour uploader sur dropbox
    
     #vide la memoire des enregistrement 5s
@@ -32,11 +32,11 @@ while True: #début de la boucle 5min
     fiveminpress = []
     fiveminhumidity = []
         
-    count = 0 #initialise compteur pour s'assurer que 1min est pasé avant de vérifier si le nb de min est un multiple de 5
+    count = 0 #initialise compteur pour s'assurer que 1min est passe avant de verifier si le nb de min est un multiple de 5
     
-    while count < 20 or (datetime.datetime.now().minute)%5 != 0: # boucle tant que est vrai une des deux conditions (nb de mesure inf à 20 / le nb de min n'est pas multiple de 5)
+    while count < 20 or (datetime.datetime.now().minute)%5 != 0: # boucle tant que est vrai une des deux conditions - nb de mesure inf a 20 - le nb de min n est pas multiple de 5
         data = ser.readline() #lecture du port serie
-        temp_in, temp_ext, statut_fan, statut_chauff, press, humidity = data.split(',') #décode les lectures 5s
+        temp_in, temp_ext, statut_fan, statut_chauff, press, humidity = data.split(',') #decode les lectures 5s
         fivemintemp_ext.append(float(temp_in)) #stock dans un tableau les lectures 5s
         fivemintemp_in.append(float(temp_ext))
         fiveminstatut_fan.append(float(statut_fan))
@@ -58,11 +58,11 @@ while True: #début de la boucle 5min
     humidity = sum(fiveminhumidity) / float(len(fiveminhumidity))
    
 
-    with open('suivitemp.txt', 'a') as f: #écrit les moyenne 5 min sur le fichier txt arrdoni avec 1 chiffre aprés la virgule
+    with open('suivitemp.txt', 'a') as f: #ecrit les moyenne 5 min sur le fichier txt avec 1 chiffre apres la virgule
         f.write('{},{},{},{},{},{},{}\n'.format(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M')),
                                   Decimal(str(round(temp_in,1))),
                                   Decimal(str(round(temp_ext,1))),
                                   Decimal(str(round(statut_fan,1))),
                                   Decimal(str(round(statut_chauff,1))),
-                                  Decimal(str(round(press,1))))) 
-                                  Decimal(str(round(humidity,1))),
+                                  Decimal(str(round(press,1))),
+                                  Decimal(str(round(humidity,1)))))

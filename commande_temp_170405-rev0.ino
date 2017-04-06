@@ -76,11 +76,11 @@ void loop() {
   Serial.print((","));
   Serial.print(statut_fan);
   Serial.print((","));
-  Serial.println(statut_chauff);
+  Serial.print(statut_chauff);
   Serial.print((","));
   Serial.print(pressure);
   Serial.print((","));
-  Serial.print(humidity);
+  Serial.println(humidity);
    
  lcd.setCursor(0, 0);
  lcd.print("Tin:");

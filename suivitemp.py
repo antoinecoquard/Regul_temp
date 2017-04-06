@@ -4,7 +4,7 @@ import serial
 import time
 import os
 from decimal import Decimal
-
+os.chdir(/home/pi/regul_temp/)
 ser = serial.Serial(
     port='/dev/ttyACM0', #port usb sur Pi à changer si PC
     baudrate = 9600 #baudrate du port serie
@@ -22,7 +22,8 @@ with open('suivitemp.txt', 'a') as f: #creation du fichier a modifier pour contr
 print 'date et heure,temp_in,temp_ext,statut_fan,statut_chauff,press, humidity\n' #pour verifier le deroulement en mode terminal
 
 while True: #début de la boucle 5min
-    os.system('sudo /home/pi/regul_temp/Dropbox-uploader/dropbox_uploader.sh upload /home/pi/suivitemp.txt /suivitemp') #tape la ligne de cmd pour uploader sur dropbox
+    os.system('sudo /home/pi/regul_temp/Dropbox-uploader/dropbox_uploader.sh upload /home/pi/regul_temp/suivitemp.txt /suivitemp') #tape la ligne de cmd pour uploader sur dropbox
+   
     #vide la memoire des enregistrement 5s
     fivemintemp_in = []
     fivemintemp_ext = []

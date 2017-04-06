@@ -103,6 +103,6 @@ void loop() {
  lcd.print("fan:");
  lcd.print(statut_fan);
  
-  delay(2500); //Update every 5 sec
+  delay(5000); //Update every 5 sec
  } 
 

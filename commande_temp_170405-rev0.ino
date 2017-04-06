@@ -38,9 +38,7 @@ void setup() {
   pinMode(pin_fan,OUTPUT);
   pinMode(pin_chauff,OUTPUT);
   Serial.begin(9600); //Begin serial communication at 9600bps
-  lcd.begin(16, 2);
-  lcd.setCursor(0, 0);
-  lcd.print("Tin:");  
+  lcd.begin(16, 2); 
 }
 
 void loop() {

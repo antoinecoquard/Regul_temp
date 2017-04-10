@@ -1,1 +1,28 @@
 #python pour générer tbl 24h
+#!/usr/bin/env python
+import datetime
+import serial
+import time
+import os
+import csv
+from decimal import Decimal
+import csv
+
+while True: #début de la boucle 5min
+
+  source = 'suivi_temp.txt'
+  with open=(source,'r')
+  source = csv.reader(source, delimiter = ',')
+  n = csv.reader.line_num
+  line_deb = n-(24*60/5)
+  line-fin = n
+  
+  tbl24h = 'tbl24h.txt'
+  with open(tbl24h, 'w')
+  tbl24h = csv.writer(tbl24h, delimiter = ','))
+  tbl24h.writerow(['date et heure','temp_in','temp_ext','statut_fan','statut_chauff','press','humidity'])
+  tbl24h.writerow(['yyyy-mm-dd hh:mm:ss','degC','degC','ss','ss','hPa','%'])
+  tbl24h.writerow(source[-24;])
+  time.sleep(60)
+  #for row in source[-20;]:
+    #tbl24h.writerow()
